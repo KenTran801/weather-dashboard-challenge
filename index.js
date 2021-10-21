@@ -26,8 +26,11 @@ var getWeather = function (cityName) {
         // console.log(mainCityName)
         mainCardCity.textContent = mainCityName;
         // Create and apply the current date to the HTML
-        var currentDateEl = moment();
-        mainCurrentDate.textContent = currentDateEl.format("M/D/YYYY");
+        var mainDate = moment();
+        mainCurrentDate.textContent = mainDate.format("M/D/YYYY");
+        // Current temperature
+        var mainCityTemp = currentWeather.main.temp;
+        mainCardTemp.textContent = ("Temperature: " + Math.floor(mainCityTemp) + "°F");
 
 
     })

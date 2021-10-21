@@ -7,7 +7,6 @@ submitBtn.addEventListener("click", function() {
     var cityInput = document.querySelector("#city-input");
     var cityName = cityInput.value.trim();
     getWeather (cityName);
-    // console.log(cityName);
 });
 
 var getWeather = function (cityName) {
@@ -16,22 +15,22 @@ var getWeather = function (cityName) {
 
     fetch(currentWeatherURL)
     .then(function(response) {
-        // console.log(response);
         return response.json();
     })
     .then(function(currentWeather) {
-        // console.log(currentWeather);
-        // Create and apply the city name to the HTML
+        // Create/apply the city name to the HTML
         var mainCityName = currentWeather.name;
-        // console.log(mainCityName)
         mainCardCity.textContent = mainCityName;
-        // Create and apply the current date to the HTML
+        // Create/apply the current date to the HTML
         var mainDate = moment();
         mainCurrentDate.textContent = mainDate.format("M/D/YYYY");
-        // Current temperature
+        // Create/apply the current temp to the HTML
         var mainCityTemp = currentWeather.main.temp;
         mainCardTemp.textContent = ("Temperature: " + Math.floor(mainCityTemp) + "°F");
-
+        // Create/apply the feels like temp to the HTML
+        var mainFeelsLikeTemp = currentWeather.main.feels_like;
+        mainCardFeelsLike.textContent = ("Feels Like: " + Math.floor(mainFeelsLikeTemp) + "°F");
+        // Create/apply the current humidity to the HTML
 
     })
 }

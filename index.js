@@ -31,6 +31,7 @@ var getWeather = function (cityName) {
         var mainFeelsLikeTemp = currentWeather.main.feels_like;
         mainCardFeelsLike.textContent = ("Feels Like: " + Math.floor(mainFeelsLikeTemp) + "°F");
         // Create/apply the current humidity to the HTML
-
+        var mainHumid = currentWeather.main.humidity;
+        mainCardHumid.textContent = ("Humidity: " + mainHumid + "%");
     })
 }

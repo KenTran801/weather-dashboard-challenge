@@ -1,4 +1,5 @@
 var submitBtn = document.querySelector("#submit-button");
+// var mainCardCityEl = document.querySelector("#mainCardCity");
 
 submitBtn.addEventListener("click", function() {
     event.preventDefault();
@@ -6,7 +7,7 @@ submitBtn.addEventListener("click", function() {
     var cityInput = document.querySelector("#city-input");
     var cityName = cityInput.value.trim();
     getWeather (cityName);
-    console.log(cityName);
+    // console.log(cityName);
 });
 
 var getWeather = function (cityName) {
@@ -19,6 +20,15 @@ var getWeather = function (cityName) {
         return response.json();
     })
     .then(function(currentWeather) {
-        console.log(currentWeather);
+        // console.log(currentWeather);
+        // Create and apply the city name to the HTML
+        var mainCityName = currentWeather.name;
+        // console.log(mainCityName)
+        mainCardCity.textContent = mainCityName;
+        // Create and apply the current date to the HTML
+        var currentDateEl = moment();
+        mainCurrentDate.textContent = currentDateEl.format("M/D/YYYY");
+
+
     })
 }

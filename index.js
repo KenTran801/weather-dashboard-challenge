@@ -15,10 +15,10 @@ var getWeather = function (cityName) {
 
     fetch(currentWeatherURL)
     .then(function(response) {
-        console.log(response);
+        // console.log(response);
         return response.json();
     })
-    .then(function(data) {
-        console.log(data);
+    .then(function(currentWeather) {
+        console.log(currentWeather);
     })
 }

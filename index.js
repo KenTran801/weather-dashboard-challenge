@@ -1,5 +1,4 @@
 var submitBtn = document.querySelector("#submit-button");
-// var mainCardCityEl = document.querySelector("#mainCardCity");
 
 submitBtn.addEventListener("click", function () {
     event.preventDefault();
@@ -23,7 +22,7 @@ submitBtn.addEventListener("click", function () {
     var storeCity = JSON.parse(localStorage.getItem("storeCity")) || [];
     storeCity.push(cityName);
     localStorage.setItem("storeCity", JSON.stringify(storeCity));
-    // Selecting the previous city will return th
+    // Selecting the previous city will return the correct data
     document.querySelectorAll(".recent-city-btn").forEach(function (returnCity) {
         returnCity.addEventListener("click", function () {
             var recentCity = this.getAttribute("data-value");
@@ -34,7 +33,7 @@ submitBtn.addEventListener("click", function () {
 
 var getWeather = function (cityName) {
     var currentWeatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=346f5b9d83ff18900a4fdcdbc47dcbde";
-    // var forecastWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=346f5b9d83ff18900a4fdcdbc47dcbde";
+    var forecastWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=346f5b9d83ff18900a4fdcdbc47dcbde";
 
     fetch(currentWeatherURL)
         .then(function (response) {
@@ -59,6 +58,11 @@ var getWeather = function (cityName) {
             // Create/apply the current wind speed to the HTML
             var mainWindSpeed = currentWeather.wind.speed;
             mainCardWind.textContent = ("Wind Speed: " + Math.floor(mainWindSpeed) + " MPH");
+            // Create/apply the weather icon tthe HTML
+            var iconCode = currentWeather.weather[0].icon;
+            var iconImg = document.createElement("img");
+            iconImg.setAttribute("src", "http://openweathermap.org/img/w/" + iconCode + ".png");
+            mainCurrentIcon.appendChild(iconImg);
             // Longittude & latitude variables to get the UV index
             var latitude = currentWeather.coord.lat
             var longitude = currentWeather.coord.lon
@@ -86,4 +90,27 @@ var getWeather = function (cityName) {
                 })
 
         })
+    fetch(forecastWeatherURL)
+        .then(function (response) {
+            return response.json();
+        }).then(function (forcastedWeather) {
+            console.log(forcastedWeather);
+            // Create for loop starting at 4 index to display noon
+            // Every 8 index score is a fulll day (3 * 8  = 24 hours)
+            // Show noon forecast info at these items in the list 4, 12, 20, 28, 36
+            for (let i = 4; i < forcastedWeather.list.length; i+=8) {
+                var forecastEl = forcastedWeather.list[i];
+                console.log(forecastEl);
+                // i needs to equal 1,2,3,4,5 to populate the cards
+                var forecastItems = (i + 4) / 8;
+                // Populate 5-day forecast cards
+                var futureDate = moment().add(forecastItems, "days").format("M/D/YYYY");
+                // date
+                // console.log(futureDate)
+                // fcd1.appendChild(futureDate)
+                var fcd = document.querySelector("#forecastDate1");
+                fcd.appendChild(futureDate);
+
+            }
+        });
 }

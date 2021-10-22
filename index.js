@@ -31,7 +31,27 @@ var getWeather = function (cityName) {
         var mainFeelsLikeTemp = currentWeather.main.feels_like;
         mainCardFeelsLike.textContent = ("Feels Like: " + Math.floor(mainFeelsLikeTemp) + "°F");
         // Create/apply the current humidity to the HTML
-        var mainHumid = currentWeather.main.humidity;
-        mainCardHumid.textContent = ("Humidity: " + mainHumid + "%");
+        var mainHumidity = currentWeather.main.humidity;
+        mainCardHumid.textContent = ("Humidity: " + mainHumidity + "%");
+        // Create/apply the current wind speed to the HTML
+        var mainWindSpeed = currentWeather.wind.speed;
+        mainCardWind.textContent = ("Wind Speed: " + Math.floor(mainWindSpeed) + " MPH");
+        // Longittude & latitude variables to get the UV index
+        var latitude = currentWeather.coord.lat
+        var longitude = currentWeather.coord.lon
+        var uvIndexURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=346f5b9d83ff18900a4fdcdbc47dcbde";
+        fetch(uvIndexURL)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(uvIndex) {
+            console.log(uvIndex);
+            console.log(latitude);
+            console.log(longitude);
+            var uvDisplay = document.createElement("button");
+            uvDisplay.textContent = (uvIndex.current.uvi);
+            mainCardIndex.textContent = ("UV Index: ");
+            mainCardIndex.appendChild(uvDisplay);
+        })
     })
 }

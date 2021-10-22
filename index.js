@@ -29,7 +29,6 @@ submitBtn.addEventListener("click", function () {
             getWeather(recentCity);
         })
     })
-
 });
 
 var getWeather = function (cityName) {
@@ -74,9 +73,6 @@ var getWeather = function (cityName) {
                     return response.json();
                 })
                 .then(function (uvIndex) {
-                    // console.log(uvIndex);
-                    // console.log(latitude);
-                    // console.log(longitude);
                     var uvDisplay = uvIndex.current.uvi;
                     var uvDisplayBtn = document.createElement("button");
                     uvDisplayBtn.textContent = uvDisplay;

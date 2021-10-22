@@ -3,10 +3,24 @@ var submitBtn = document.querySelector("#submit-button");
 
 submitBtn.addEventListener("click", function () {
     event.preventDefault();
-
+    // Create a variable for the search input
     var cityInput = document.querySelector("#city-input");
     var cityName = cityInput.value.trim();
     getWeather(cityName);
+    // Creating a button with teh recent city searches
+    var cityListBtn = document.createElement("button");
+    if (cityName === "") {
+        alert("Field cannot be blank!")
+        return false;
+    } else {
+        cityListBtn.textContent = cityName;
+        cityListBtn.setAttribute("class", "list-group-item list-group-item-action list-group-item-dark");
+        cityList.appendChild(cityListBtn);
+    }
+    var storeCity = JSON.parse(localStorage.getItem("storeCity")) || [];
+    storeCity.push(cityName);
+    localStorage.setItem("storeCity", JSON.stringify(storeCity));
+
 });
 
 var getWeather = function (cityName) {

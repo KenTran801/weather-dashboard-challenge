@@ -1,6 +1,5 @@
 var submitBtn = document.querySelector("#submit-button");
 
-
 submitBtn.addEventListener("click", function () {
     event.preventDefault();
     // Create a variable for the search input

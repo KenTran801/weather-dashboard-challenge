@@ -30,6 +30,7 @@ submitBtn.addEventListener("click", function () {
             getWeather(recentCity);
         })
     })
+
 });
 
 var getWeather = function (cityName) {
@@ -63,7 +64,8 @@ var getWeather = function (cityName) {
             var iconCode = currentWeather.weather[0].icon;
             var iconImg = document.createElement("img");
             iconImg.setAttribute("src", "http://openweathermap.org/img/w/" + iconCode + ".png");
-            mainCurrentIcon.appendChild(iconImg);           
+            mainCurrentIcon.innerHTML = "";
+            mainCurrentIcon.appendChild(iconImg);
             // Longittude & latitude variables to get the UV index
             var latitude = currentWeather.coord.lat
             var longitude = currentWeather.coord.lon
@@ -102,34 +104,31 @@ var getWeather = function (cityName) {
             // Show noon forecast info at these items in the list 4, 12, 20, 28, 36
             for (let i = 4; i < forcastedWeather.list.length; i += 8) {
                 var forecastEl = forcastedWeather.list[i];
-                // console.log(forecastEl);
                 // i needs to equal 1,2,3,4,5 to populate the cards
                 var forecastItems = (i + 4) / 8;
-                console.log(forecastItems)
                 // Populate 5-day forecast cards
                 var futureDate = moment().add(forecastItems, "days").format("M/D/YYYY");
                 // date
-                console.log(futureDate)
-                
                 var populateCard = document.querySelector("#forecastCards" + forecastItems);
                 populateCard.setAttribute("class", "text-white bg-primary card");
-                // $("#forecastDate" + forecastItems).text("").append(futureDate);
                 var populateDate = document.querySelector("#forecastDate" + forecastItems);
+                populateDate.innerHTML = "";
                 populateDate.append(futureDate);
                 // // temperature
-                // $("#forecastTemp" + forecastItems).text("Temp: " + Math.floor(forecastEl.main.temp) + "°F");
                 var populateTemp = document.querySelector("#forecastTemp" + forecastItems);
-                populateTemp.append("Temp: " + Math.floor(forecastEl.main.temp) + "°F")      
-                // // icons
-                // var forecastIconCode = forecastEl.weather[0].icon;
-                // var forecastIconImg = $("<img>");
-                // forecastIconImg.attr("src", "http://openweathermap.org/img/w/" + forecastIconCode + ".png");
-                // $("#forecastIcon" + forecastItems).empty().append(forecastIconImg);
+                populateTemp.innerHTML = "";
+                populateTemp.append("Temp: " + Math.floor(forecastEl.main.temp) + "°F")
                 // // humidity
-                // $("#forecastHumid" + forecastItems).text("Humidity: " + forecastEl.main.humidity + "%");
-                // // blue background color
-                // $("#forecastCards" + forecastItems).addClass("text-white bg-primary card")
+                var populateHumid = document.querySelector("#forecastHumid" + forecastItems);
+                populateHumid.innerHTML = "";
+                populateHumid.append("Humidity: " + forecastEl.main.humidity + "%");
+                // // icons
+                var forecastIconCode = forecastEl.weather[0].icon;
+                var forecastIconImg = document.createElement("img");
+                forecastIconImg.setAttribute("src", "http://openweathermap.org/img/w/" + forecastIconCode + ".png");
+                var populateIcon = document.querySelector("#forecastIcon" + forecastItems);
+                populateIcon.innerHTML = "";
+                populateIcon.append(forecastIconImg);
             }
-          
         });
 }

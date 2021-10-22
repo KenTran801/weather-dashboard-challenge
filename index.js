@@ -16,7 +16,7 @@ submitBtn.addEventListener("click", function () {
         cityListBtn.textContent = cityName;
         cityListBtn.setAttribute("class", "list-group-item list-group-item-action list-group-item-dark");
         cityListBtn.setAttribute("class", "recent-city-btn");
-        // cityListBtn.setAttribute("data-value", cityName);
+        cityListBtn.setAttribute("data-value", cityName);
         cityList.appendChild(cityListBtn);
     }
     // Storing the recent city in local storage
@@ -26,11 +26,10 @@ submitBtn.addEventListener("click", function () {
     // Selecting the previous city will return th
     document.querySelectorAll(".recent-city-btn").forEach(function (returnCity) {
         returnCity.addEventListener("click", function () {
-            var recentCity = cityName;
+            var recentCity = this.getAttribute("data-value");
             getWeather(recentCity);
         })
-    }
-    )
+    })
 });
 
 var getWeather = function (cityName) {

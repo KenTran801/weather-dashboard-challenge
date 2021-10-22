@@ -15,12 +15,22 @@ submitBtn.addEventListener("click", function () {
     } else {
         cityListBtn.textContent = cityName;
         cityListBtn.setAttribute("class", "list-group-item list-group-item-action list-group-item-dark");
+        cityListBtn.setAttribute("class", "recent-city-btn");
+        // cityListBtn.setAttribute("data-value", cityName);
         cityList.appendChild(cityListBtn);
     }
+    // Storing the recent city in local storage
     var storeCity = JSON.parse(localStorage.getItem("storeCity")) || [];
     storeCity.push(cityName);
     localStorage.setItem("storeCity", JSON.stringify(storeCity));
-
+    // Selecting the previous city will return th
+    document.querySelectorAll(".recent-city-btn").forEach(function (returnCity) {
+        returnCity.addEventListener("click", function () {
+            var recentCity = cityName;
+            getWeather(recentCity);
+        })
+    }
+    )
 });
 
 var getWeather = function (cityName) {
@@ -59,9 +69,9 @@ var getWeather = function (cityName) {
                     return response.json();
                 })
                 .then(function (uvIndex) {
-                    console.log(uvIndex);
-                    console.log(latitude);
-                    console.log(longitude);
+                    // console.log(uvIndex);
+                    // console.log(latitude);
+                    // console.log(longitude);
                     var uvDisplay = uvIndex.current.uvi;
                     var uvDisplayBtn = document.createElement("button");
                     uvDisplayBtn.textContent = uvDisplay;
@@ -74,7 +84,7 @@ var getWeather = function (cityName) {
                     } else if (uvDisplay > 6) {
                         uvDisplayBtn.setAttribute("class", "btn btn-danger")
                     };
-        })
+                })
 
         })
 }

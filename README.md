@@ -10,7 +10,7 @@ Objecttive: Create a weather application that allows the user to see the weather
 2. User is presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index.
 3. UV index will indicate whether the conditions are favorable, moderate, or severe.
 4. User is presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-5. user is able to click on a city in the search history and will again be presented with current and future conditions for that city
+5. User is able to click on a city in the search history and will again be presented with current and future conditions for that city
 
 ## Links
 

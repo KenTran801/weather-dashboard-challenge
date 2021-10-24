@@ -1,6 +1,6 @@
 var submitBtn = document.querySelector("#submit-button");
 
-submitBtn.addEventListener("click", function () {
+submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     // Create a variable for the search input
     var cityInput = document.querySelector("#city-input");
